@@ -1,0 +1,9 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="BestCNDB:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/BestCNDB_jar</output-path>
+    <root id="archive" name="BestCNDB.jar">
+      <element id="module-output" name="CNDBZero" />
+      <element id="extracted-dir" path="D:/MySQL/Connector J 5.1.26/mysql-connector-java-5.1.26-bin.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>
