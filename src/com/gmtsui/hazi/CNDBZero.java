@@ -107,7 +107,7 @@ public class CNDBZero {
                             sqlImportCollected(path, t.localesName);
                             sqlDeleteUnfinished(t.localesName, col);
                         }
-                        sqlDeleteUnused(t.localesIds, t.templateName, t.localesName);
+                        sqlDeleteUnused(t.templateName, t.localesName,t.templateIds,t.localesIds);
                         sqlUpdateOriginal(t.localesName, t.localesIds, col);
                     }
                     sqlClearTable(t.localesName);
@@ -180,12 +180,12 @@ public class CNDBZero {
         return re;
     }
 
-    private int sqlDeleteUnused(String localesIds[], String templateName, String localesName) throws SQLException {
+    private int sqlDeleteUnused(String templateName, String localesName,String templateIds[],String localesIds[] ) throws SQLException {
         int re = 0;
         System.out.println("Filtering ...");
-        StringBuilder sql = new StringBuilder("DELETE FROM `").append(localesName).append("` WHERE NOT EXISTS (SELECT * FROM `").append(templateName).append("` WHERE `").append(localesName).append("`.`").append(localesIds[0]).append("` = `").append(localesName).append("`.`").append(localesIds[0]).append("` ");
+        StringBuilder sql = new StringBuilder("DELETE FROM `").append(localesName).append("` WHERE NOT EXISTS (SELECT * FROM `").append(templateName).append("` WHERE `").append(localesName).append("`.`").append(localesIds[0]).append("` = `").append(templateName).append("`.`").append(templateIds[0]).append("` ");
         for (int i = 1; i != localesIds.length; i++) {
-            sql.append("AND `").append(localesName).append("`.`").append(localesIds[i]).append("` = `").append(localesName).append("`.`").append(localesIds[i]).append("` ");
+            sql.append("AND `").append(localesName).append("`.`").append(localesIds[i]).append("` = `").append(templateName).append("`.`").append(templateIds[i]).append("` ");
         }
         sql.append(");");
         System.out.println(sql.toString());
